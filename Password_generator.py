@@ -1,5 +1,17 @@
 import random
-passlen = int(input("Enter the length of the Password: "))
-s = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_"
-p = "".join(random.sample(s, passlen))
-print("Password: " + p)
+
+try:
+    length = int(input("Enter the password length: "))
+    
+    if length <= 0:
+        print("Password length must be greater than 0.")
+    else:
+        characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_"
+        
+        if length > len(characters):
+            print(f"Maximum password length is {len(characters)} characters.")
+        else:
+            password = "".join(random.sample(characters, length))
+            print(f"Generated Password: {password}")
+except ValueError:
+    print("Please enter a valid number.")

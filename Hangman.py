@@ -1,19 +1,38 @@
-# Hangman game
-word = "python"
-guessed_letters = ()
-attempts_left = 6
+import random
 
-while attempts_left > 0:
-    letter = input("\nGuess a letter: ")
+words = ["python", "hangman", "developer", "programming", "computer", "challenge"]
+word = random.choice(words)
+guessed = set()
+attempts = 6
+won = False
 
+while attempts > 0:
+    display = ''.join([letter if letter in guessed else '_' for letter in word])
+    print(f"\nWord: {display}")
+    print(f"Guessed letters: {', '.join(sorted(guessed)) if guessed else 'None'}")
+    print(f"Attempts left: {attempts}")
+    
+    letter = input("Guess a letter: ").lower().strip()
+    
+    if len(letter) != 1 or not letter.isalpha():
+        print("Please enter a single letter.")
+        continue
+    
+    if letter in guessed:
+        print("You already guessed that letter!")
+        continue
+    
+    guessed.add(letter)
+    
     if letter in word:
         print("Correct!")
-        guessed_letters += (letter,)
+        if all(char in guessed for char in word):
+            print(f"\nYou won! The word was: {word}")
+            won = True
+            break
     else:
         print("Wrong!")
-        attempts_left -= 1
+        attempts -= 1
 
-    print("Guessed letters: ", guessed_letters)
-    print("Attempts left: ", attempts_left)
-
-print("Game over!")
+if not won:
+    print(f"\nGame over! The word was: {word}")

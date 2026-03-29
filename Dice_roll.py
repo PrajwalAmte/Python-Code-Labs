@@ -1,10 +1,17 @@
-# Dice roll simulator
 import random
+
 while True:
-    print("1.Roll the dice \n2.Exit")
-    user = int(input("What You want to do: "))
-    if user == 1:
-        number = random.randint(0, 6)
-        print("Number = "+str(number)+"\n")
-    else:
+    print("\n--- Dice Roller ---")
+    print("1. Roll the dice")
+    print("2. Exit")
+    
+    choice = int(input("Choose an option (1-2): "))
+    
+    if choice == 1:
+        roll = random.randint(1, 6)
+        print(f"Dice rolled: {roll}")
+    elif choice == 2:
+        print("Thanks for playing!")
         break
+    else:
+        print("Invalid choice. Please try again.")
